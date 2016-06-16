@@ -1,7 +1,7 @@
 #!/bin/sh
 # wg - tiny, unix-y static site generator
 
-IDIR="$(echo "$1" | sed -e 's,/*$,,')"
+IDIR="$(echo "$1" | sed -e 's|/*$||')"
 if [ -z "$IDIR" ] || [ ! -d "$IDIR" ]; then
 	echo "Usage: $(basename $0) [dir]"
 	exit 1
@@ -17,7 +17,7 @@ rm -rf "$ODIR"
 mkdir -p "$ODIR"
 
 cd "$IDIR"
-FILES=$(find . -name "_*" -prune -o ! -iname ".*" -type f -print | sed -e 's|^\./||')
+FILES=$(find . -name "_*" -prune -o -not -iname ".*" -type f -print | sed -e 's|^\./||')
 for f in $FILES; do
 	name=${f%.*}
 	ext=${f##*.}
