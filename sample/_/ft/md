@@ -1,0 +1,5 @@
+#!/bin/sh
+
+test -n "$GET_EXT" && echo "html" && exit 1
+
+echo $(markdown "$1")
