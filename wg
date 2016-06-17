@@ -21,6 +21,7 @@ FILES=$(find . -name "_*" -prune -o -not -iname ".*" -type f -print | sed -e 's|
 for f in $FILES; do
 	name=${f%.*}
 	ext=${f##*.}
+	mkdir -p "$ODIR/$(dirname $f)"
 	if [ -f "./_/ft/$ext" ]; then
 		outext=$(GET_EXT=1 ./_/ft/$ext)
 		: ${outext:="html"}
